@@ -1,3 +1,4 @@
+use crate::to_do::traits::create::Create;
 use super::base::Base;
 use super::super::enums::TaskStatus;
 
@@ -23,6 +24,8 @@ impl Done {
 
 
 impl Get for Done {}
+
+impl Create for Done {}
 
 impl Delete for Done {}
 

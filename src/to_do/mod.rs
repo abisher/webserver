@@ -1,6 +1,6 @@
-mod structs;
-mod traits;
-mod enums;
+pub(crate) mod structs;
+pub(crate) mod traits;
+pub(crate) mod enums;
 
 use enums::TaskStatus;
 use structs::done::Done;
