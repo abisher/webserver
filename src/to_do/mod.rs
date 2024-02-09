@@ -21,4 +21,5 @@ pub fn to_do_factory(title: &str, status: TaskStatus) -> ItemTypes {
             ItemTypes::Pending(Pending::new(title))
         }
     }
+
 }
