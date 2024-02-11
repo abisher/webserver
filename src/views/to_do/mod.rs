@@ -1,5 +1,6 @@
 mod create;
 mod get;
+mod edit;
 
 use actix_web::web::{ServiceConfig, get, scope, post};
 
