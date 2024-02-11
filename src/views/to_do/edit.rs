@@ -25,4 +25,9 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
             )
         }
     }
+
+    let existing_item = to_do_factory(to_do_item.title.as_str(),
+    status.clone());
+
+    if &status.stringify() == &TaskStatus::from_string(&to_do_item.status.as_str())
 }
