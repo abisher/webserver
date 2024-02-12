@@ -7,10 +7,12 @@ use crate::json_serialization::{to_do_item::ToDoItem,
                                 to_do_items::ToDoItems};
 
 use crate::processes::process_input;
+use crate::jwt::JwToken;
 
 
-pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
+pub async fn edit(to_do_item: web::Json<ToDoItem>, token: JwToken) -> HttpResponse {
     let state = read_file("./state.json");
+    println!("here is the message in the token: {}", token.message);
 
     let status: TaskStatus;
 
@@ -37,4 +39,5 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
 
     process_input(existing_item, "edit".to_owned(), &state);
     HttpResponse::Ok().json(ToDoItems::get_state())
+
 }
