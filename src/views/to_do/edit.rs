@@ -16,18 +16,25 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
 
     match state.get(&to_do_item.title) {
         Some(result) => {
-            status = TaskStatus::new(result.as_str().unwrap());
+            status = TaskStatus::from_string(result.as_str()
+                .unwrap().to_string());
         }
 
         None => {
-            HttpResponse::NotFound().json(
+            return HttpResponse::NotFound().json(
                 format!("{} is not in state", &to_do_item.title)
-            )
+            );
         }
-    }
+    };
 
     let existing_item = to_do_factory(to_do_item.title.as_str(),
-    status.clone());
+                                      status.clone());
 
-    if &status.stringify() == &TaskStatus::from_string(&to_do_item.status.as_str())
+    if &status.stringify() == &TaskStatus::from_string(to_do_item.status.as_str()
+        .to_string()).stringify() {
+        return HttpResponse::Ok().json(ToDoItems::get_state());
+    }
+
+    process_input(existing_item, "edit".to_owned(), &state);
+    HttpResponse::Ok().json(ToDoItems::get_state())
 }
