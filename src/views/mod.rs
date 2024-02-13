@@ -1,6 +1,7 @@
 mod auth;
 mod path;
 mod to_do;
+mod app;
 
 use auth::auth_views_factory;
 use to_do::to_do_views_factory;
