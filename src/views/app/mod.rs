@@ -1,9 +1,8 @@
-use actix_web::HttpResponse;
+use actix_web::web;
 
 mod items;
+mod content_loader;
 
-pub async fn items() -> HttpResponse {
-    HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .body("<h1>Items<h1>")
+pub fn app_views_factory(app: &mut web::ServiceConfig) {
+    app.route("/", web::get().to(items::items));
 }
