@@ -14,12 +14,9 @@ fn process_pending(item: Pending, command: String, state: &Map<String, Value>) {
     match command.as_str() {
         "get" => item.get(&item.super_struct.title, &state),
 
-        "delete" => item.create(&item.super_struct.title,
-                                &item.super_struct.status.stringify(), &mut state),
-
         "edit" => item.set_to_done(&item.super_struct.title, &mut state),
         "create" => item.create(&item.super_struct.title,
-        &item.super_struct.status.stringify(), &mut state),
+                                &item.super_struct.status.stringify(), &mut state),
         _ => println!("command: {} not supported", command)
     }
 }
@@ -29,8 +26,7 @@ fn process_done(item: Done, command: String, state: &Map<String, Value>) {
     match command.as_str() {
         "get" => item.get(&item.super_struct.title, &state),
 
-        "delete" => item.create(&item.super_struct.title,
-                                &item.super_struct.status.stringify(), &mut state),
+        "delete" => item.delete(&item.super_struct.title, &mut state),
 
         "edit" => item.set_to_pending(&item.super_struct.title, &mut state),
         _ => println!("command: {} not supported", command)
