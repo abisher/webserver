@@ -1,0 +1,16 @@
+.itemContainer {
+    background: #034f84;
+    margin: 0.3rem;
+}
+
+.itemContainer:hover {
+    background: #034f99;
+}
+
+.itemContainer p {
+    color: white;
+    display: inline-block;
+    margin: 0.5rem;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+}

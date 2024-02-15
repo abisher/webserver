@@ -6,8 +6,10 @@ function renderItems(items, processType,
     for (let i = 0; i < items.length; i++) {
         let title = items[i]["title"];
         let placeholderId = processType + "-" + title.replaceAll(" ", "-");
-        placeholder += "<div>" + title + "<button " + 'id="' + placeholderId + '">'
-            + processType + '</button>' + "</div>";
+        placeholder += '<div class="itemContainer">' +
+            '<p>' + title + '</p>' + '<div class="actionButton" ' +
+            'id=""' + placeholderId + '">' + processType +
+            '</div>' + "</div>";
 
         itemsMeta.push({"id": placeholderId, "title": title})
     }
@@ -46,7 +48,7 @@ function apiCall(url, method) {
 }
 
 function editItem() {
-    let title = this.id.replaceAll("-", "")
+    let title = this.id.replaceAll("-", " ")
         .replace("edit ", "");
     let call = apiCall("/v1/item/edit", "POST");
     let json = {
@@ -58,7 +60,7 @@ function editItem() {
 }
 
 function deleteItem() {
-    let title = this.id.replaceAll("-", "")
+    let title = this.id.replaceAll("-", " ")
         .replace("delete ", "");
     let call = apiCall("/v1/item/delete", "POST");
     let json = {
@@ -82,7 +84,7 @@ document.getElementById("create-button")
 function createItem() {
     let title = document.getElementById("name");
 
-    let call = apiCall("/v1/item/create" + title.value, "POST");
+    let call = apiCall("/v1/item/create/" + title.value, "POST");
     call.send();
 
     document.getElementById("name").value = null;
