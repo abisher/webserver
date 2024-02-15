@@ -12,15 +12,20 @@
     <title>To Do App</title>
 </head>
 <body>
-    <h1>Done Items</h1>
-    <div id="doneItems"></div>
-    <h1>To Do Items</h1>
-    <div id="pendingItems"></div>
-    <input type="text" id="name" placeholder="create to do
-     item">
-    <button id="create-button" value="Send">Create Item</button>
+    <div class="mainContainer">
+        <h1>Done Items</h1>
+        <div id="doneItems"></div>
+        <h1>To Do Items</h1>
+        <div id="pendingItems"></div>
+        <div class="inputContainer">
+            <input type="text"
+                   id="name" placeholder="create to do item">
+            <div class="actionButton"
+                 id="create-button" value="Send">Create</div>
+        </div>
+    </div>
     <script>
         {{JAVASCRIPT}}
     </script>
 </body>
-</html> 
+</html>
