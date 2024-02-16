@@ -12,7 +12,6 @@ pub fn add_component(component_tag: String, html_data: String) -> String {
     let ccs_path = String::from("./templates/components/") +
         &component_tag.to_lowercase() + ".css";
     let css_loaded = read_file(&ccs_path);
-    println!("{css_loaded}");
     let html_path = String::from("./templates/components/") +
         &component_tag.to_lowercase() + ".html";
     let html_loaded = read_file(&html_path);
