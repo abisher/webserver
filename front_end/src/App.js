@@ -11,7 +11,7 @@ class App extends Component {
 
     // makes the API call
     getItems() {
-        axios.get("https://127.0.0.1:8000/v1/item/get",
+        axios.get("http://127.0.0.1:8080/v1/item/get",
             {headers: {"token": "some_token"}})
             .then(response => {
                 let pendingItems = response.data["pending_items"]
@@ -20,8 +20,8 @@ class App extends Component {
                 this.setState({
                     "pending_items": this.processItemValues(pendingItems),
                     "done_items": this.processItemValues(done_items),
-                    "pending_items_count": response.data["pending_items_count"],
-                    "done_items_count": response.data["done_items_count"]
+                    "pending_items_count": response.data["pending_item_count"],
+                    "done_items_count": response.data["done_item_count"]
                 })
             })
     }
