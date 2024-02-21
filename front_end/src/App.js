@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import ToDoItem from "./components/ToDoItem";
+import CreateToDoItem from "./components/CreateToDoItem";
 
 
 class App extends Component {
@@ -36,14 +37,30 @@ class App extends Component {
     // converts items from API to HTML
     processItemValues(items) {
         let itemList = [];
-        items.forEach((item, index) => {
+        items.forEach((item, _) => {
+            console.log(item.status)
             itemList.push(
-                <li key={index}>{item.title} {item.status}</li>
-            )
+                <ToDoItem key={item.status + item.title}
+                          title={item.title}
+                          status={item.status}
+                          passBackResponse={this.handleReturnedState}
+                />)
         })
 
         return itemList
     }
+
+    handleReturnedState = (response) => {
+        let pendingItems = response.data["pending_items"]
+        let doneItems = response.data["done_items"]
+        this.setState({
+            "pending_items": this.processItemValues(pendingItems),
+            "done_items": this.processItemValues(doneItems),
+            "pending_items_count": response.data["pendingItemsCount"],
+            "done_items_count": response.data["doneItemsCount"]
+        })
+    }
+
 
     render() {
         return (
@@ -54,6 +71,7 @@ class App extends Component {
                 <h1>Pending Items</h1>
                 <p>pending item count: {this.state.pending_items_count}</p>
                 {this.state.pending_items}
+                <CreateToDoItem passBackResponse={this.handleReturnedState}/>
             </div>
         )
     }

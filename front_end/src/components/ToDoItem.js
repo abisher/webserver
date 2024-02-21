@@ -37,10 +37,10 @@ class ToDoItem extends Component {
     }
 
     render() {
-        return <div>
+        return (<div className={"itemContainer"}>
             <p>{this.state.title}</p>
-            <button onClick={this.sendRequest}>{this.state.button}</button>
-        </div>
+            <button className={"actionButton"} onClick={this.sendRequest}>{this.state.button}</button>
+        </div>)
     }
 }
 
